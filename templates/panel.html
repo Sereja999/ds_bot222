@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Панель управления ботом</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>Настройки бота</h1>
+{% for guild_id, data in config.servers.items() %}
+<form action="/update" method="post">
+    <input type="hidden" name="password" value="{{ request.query_params.get('password') }}">
+    <input type="hidden" name="guild_id" value="{{ guild_id }}">
+    <label>Канал ID: <input type="number" name="channel_id" value="{{ data.channel_id }}"></label>
+    <label>Таймер (мин): <input type="number" name="timer" value="{{ data.timer }}"></label>
+    <button type="submit">Сохранить</button>
+</form>
+<hr>
+{% endfor %}
+</body>
+</html>
